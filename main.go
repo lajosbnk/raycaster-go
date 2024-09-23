@@ -19,6 +19,7 @@ var player = Player{
 	TurnSpeed:     270 * (math.Pi / 180),
 	GameMap:       &gameMap,
 }
+var rays = Rays{Player: &player, GameMap: &gameMap, Rays: make([]*Ray, NUM_RAYS)}
 
 func main() {
 	initialize()
@@ -36,10 +37,15 @@ func initialize() {
 	rl.SetWindowState(rl.FlagWindowUndecorated)
 	rl.HideCursor()
 	rl.SetTargetFPS(60)
+
+	for i := range NUM_RAYS {
+		rays.Rays[i] = &Ray{}
+	}
 }
 
 func update() {
 	player.Update()
+	rays.castAllRays()
 }
 
 func render() {
@@ -47,6 +53,7 @@ func render() {
 	rl.ClearBackground(rl.Black)
 
 	gameMap.Render()
+	rays.Render()
 	player.Render()
 
 	rl.EndDrawing()

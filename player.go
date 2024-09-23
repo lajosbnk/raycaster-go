@@ -43,12 +43,12 @@ func (p *Player) Update() {
 	p.RotationAngle += float32(p.TurnDirection) * (p.TurnSpeed * rl.GetFrameTime())
 	moveStep := float32(p.WalkDirection) * p.WalkSpeed * rl.GetFrameTime()
 
-	newPlayerX := p.X + float32(math.Cos(float64(p.RotationAngle)))*moveStep
-	newPlayerY := p.Y + float32(math.Sin(float64(p.RotationAngle)))*moveStep
+	newPlayerX := int(math.Floor(float64(p.X + float32(math.Cos(float64(p.RotationAngle)))*moveStep)))
+	newPlayerY := int(math.Floor(float64(p.Y + float32(math.Sin(float64(p.RotationAngle)))*moveStep)))
 
 	if !gameMap.HasWallAt(newPlayerX, newPlayerY) {
-		p.X = newPlayerX
-		p.Y = newPlayerY
+		p.X = float32(newPlayerX)
+		p.Y = float32(newPlayerY)
 	}
 }
 

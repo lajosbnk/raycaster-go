@@ -2,7 +2,6 @@ package main
 
 import (
 	"image/color"
-	"math"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -50,13 +49,17 @@ func (m *Map) Render() {
 	}
 }
 
-func (m *Map) HasWallAt(x float32, y float32) bool {
+func (m *Map) HasWallAt(x int, y int) bool {
 	if x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT {
 		return true
 	}
 
-	mapGridIndexX := int(math.Floor(float64(x / TILE_SIZE)))
-	mapGridIndexY := int(math.Floor(float64(y / TILE_SIZE)))
+	mapGridIndexX := x / TILE_SIZE
+	mapGridIndexY := y / TILE_SIZE
 
 	return MAP[mapGridIndexY][mapGridIndexX] != 0
+}
+
+func (m *Map) GetContentAt(x int, y int) int {
+	return MAP[y][x]
 }
