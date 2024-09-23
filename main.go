@@ -1,8 +1,24 @@
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	"math"
 
-var player = Player{X: 0, Y: 0, Speed: 50}
+	rl "github.com/gen2brain/raylib-go/raylib"
+)
+
+var gameMap = Map{}
+var player = Player{
+	X:             WINDOW_WIDTH / 2,
+	Y:             WINDOW_HEIGHT / 2,
+	Width:         5,
+	Height:        5,
+	TurnDirection: 0,
+	WalkDirection: 0,
+	RotationAngle: math.Pi / 2,
+	WalkSpeed:     200,
+	TurnSpeed:     270 * (math.Pi / 180),
+	GameMap:       &gameMap,
+}
 
 func main() {
 	initialize()
@@ -23,13 +39,14 @@ func initialize() {
 }
 
 func update() {
-	player.Update(rl.GetFrameTime())
+	player.Update()
 }
 
 func render() {
 	rl.BeginDrawing()
 	rl.ClearBackground(rl.Black)
 
+	gameMap.Render()
 	player.Render()
 
 	rl.EndDrawing()
