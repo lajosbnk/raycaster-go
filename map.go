@@ -57,6 +57,10 @@ func (m *Map) HasWallAt(x int, y int) bool {
 	mapGridIndexX := x / TILE_SIZE
 	mapGridIndexY := y / TILE_SIZE
 
+	if mapGridIndexX >= MAP_NUM_COLS || mapGridIndexY >= MAP_NUM_ROWS {
+		return true
+	}
+
 	return MAP[mapGridIndexY][mapGridIndexX] != 0
 }
 
