@@ -105,8 +105,8 @@ func _castRay(rayAngle float32, stripId int, rs *Rays) {
 			horzWallHitX = int(nextHorzTouchX)
 			horzWallHitY = int(nextHorzTouchY)
 
-			contentXPos := int(math.Floor(float64(xToCheck) / TILE_SIZE))
-			contentYPos := int(math.Floor(float64(yToCheck) / TILE_SIZE))
+			contentXPos := int(xToCheck / TILE_SIZE)
+			contentYPos := int(yToCheck / TILE_SIZE)
 			horzWallContent = rs.GameMap.GetContentAt(contentXPos, contentYPos)
 
 			break
@@ -164,8 +164,8 @@ func _castRay(rayAngle float32, stripId int, rs *Rays) {
 			vertWallHitX = int(nextVertTouchX)
 			vertWallHitY = int(nextVertTouchY)
 
-			contentXPos := int(math.Floor(float64(xToCheck) / TILE_SIZE))
-			contentYPos := int(math.Floor(float64(yToCheck) / TILE_SIZE))
+			contentXPos := int(xToCheck / TILE_SIZE)
+			contentYPos := int(yToCheck / TILE_SIZE)
 			vertWallContent = rs.GameMap.GetContentAt(contentXPos, contentYPos)
 
 			break

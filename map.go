@@ -65,5 +65,8 @@ func (m *Map) HasWallAt(x int, y int) bool {
 }
 
 func (m *Map) GetContentAt(x int, y int) int {
+	if y < 0 || y >= MAP_NUM_ROWS || x < 0 || x >= MAP_NUM_COLS {
+		return 0
+	}
 	return MAP[y][x]
 }
